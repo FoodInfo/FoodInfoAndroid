@@ -1,5 +1,7 @@
 package com.xpn.foodinfo.ui;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -8,10 +10,17 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.xpn.foodinfo.R;
+import com.xpn.foodinfo.ui.auth.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
+
+
+    public static void start(Context context) {
+        Intent intent = new Intent(context, MainActivity.class);
+        context.startActivity(intent);
+    }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
