@@ -10,7 +10,6 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.xpn.foodinfo.R;
-import com.xpn.foodinfo.ui.auth.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
 
