@@ -8,7 +8,9 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.firebase.ui.auth.AuthUI;
 import com.xpn.foodinfo.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,6 +31,11 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     mTextMessage.setText(R.string.title_home);
+
+                    AuthUI.getInstance().signOut(MainActivity.this).addOnCompleteListener(task -> {
+                        Toast.makeText(MainActivity.this, "Signed out", Toast.LENGTH_SHORT).show();
+                        finish();
+                    });
                     return true;
                 case R.id.navigation_dashboard:
                     mTextMessage.setText(R.string.title_dashboard);

@@ -13,11 +13,9 @@ public class Authentication {
 
     private static final List<AuthUI.IdpConfig> providers = Arrays.asList(
             new AuthUI.IdpConfig.EmailBuilder().build(),
-//            new AuthUI.IdpConfig.PhoneBuilder().build(),
             new AuthUI.IdpConfig.GoogleBuilder().build(),
-            new AuthUI.IdpConfig.FacebookBuilder().build()
-//            new AuthUI.IdpConfig.GitHubBuilder().build()
-//            new AuthUI.IdpConfig.TwitterBuilder().build()
+            new AuthUI.IdpConfig.FacebookBuilder().build(),
+            new AuthUI.IdpConfig.TwitterBuilder().build()
     );
 
     public static void startForResult(Activity activity, final int signInCode) {

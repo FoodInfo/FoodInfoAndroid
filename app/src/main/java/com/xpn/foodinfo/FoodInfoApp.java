@@ -5,8 +5,6 @@ import android.content.Context;
 import android.support.multidex.MultiDex;
 
 import com.crashlytics.android.Crashlytics;
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
 
 import io.fabric.sdk.android.Fabric;
 import timber.log.Timber;
@@ -25,10 +23,6 @@ public class FoodInfoApp extends Application {
 
         // Initialize logger
         Timber.plant(new Timber.DebugTree());
-
-        // Initialize Facebook SDK
-//        FacebookSdk.sdkInitialize(getApplicationContext());
-//        AppEventsLogger.activateApp(this);
     }
 
     @Override
