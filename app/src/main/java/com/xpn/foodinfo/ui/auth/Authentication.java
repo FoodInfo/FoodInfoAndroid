@@ -24,10 +24,11 @@ public class Authentication {
                 AuthUI.getInstance()
                         .createSignInIntentBuilder()
                         .setAvailableProviders(providers)
-//                        .setTosAndPrivacyPolicyUrls("https://foodinfo.github.io/FoodInfoAndroid/privacy_policy",
-//                                                    "https://foodinfo.github.io/FoodInfoAndroid/privacy_policy")
+                        .setTosAndPrivacyPolicyUrls("https://foodinfo.github.io/FoodInfoAndroid/terms_and_conditions",
+                                                    "https://foodinfo.github.io/FoodInfoAndroid/privacy_policy")
                         .setLogo(R.mipmap.ic_launcher)
-                        .setTheme(R.style.AppTheme_AppBarOverlay)
+                        .setTheme(R.style.AppTheme_NoActionBar)
+                        .setAlwaysShowSignInMethodScreen(true)
                         .build()
                         .setAction(Intent.ACTION_MAIN)
                         .addCategory(Intent.CATEGORY_HOME)
