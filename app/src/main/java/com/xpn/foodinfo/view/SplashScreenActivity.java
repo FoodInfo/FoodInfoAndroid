@@ -1,4 +1,4 @@
-package com.xpn.foodinfo.ui;
+package com.xpn.foodinfo.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +8,8 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.xpn.foodinfo.R;
-import com.xpn.foodinfo.ui.auth.Authentication;
+import com.xpn.foodinfo.view.auth.Authentication;
+import com.xpn.foodinfo.view.main.MainActivity;
 
 
 public class SplashScreenActivity extends AppCompatActivity {

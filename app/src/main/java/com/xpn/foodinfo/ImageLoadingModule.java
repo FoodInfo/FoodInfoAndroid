@@ -9,8 +9,8 @@ import com.bumptech.glide.Registry;
 import com.bumptech.glide.annotation.GlideModule;
 import com.bumptech.glide.module.AppGlideModule;
 import com.caverock.androidsvg.SVG;
-import com.xpn.foodinfo.ui.util.image.svg.SvgDecoder;
-import com.xpn.foodinfo.ui.util.image.svg.SvgDrawableTranscoder;
+import com.xpn.foodinfo.view.util.image.svg.SvgDecoder;
+import com.xpn.foodinfo.view.util.image.svg.SvgDrawableTranscoder;
 
 import java.io.InputStream;
 

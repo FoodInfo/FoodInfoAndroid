@@ -1,4 +1,4 @@
-package com.xpn.foodinfo.ui.auth;
+package com.xpn.foodinfo.view.auth;
 
 import android.app.Activity;
 import android.content.Intent;

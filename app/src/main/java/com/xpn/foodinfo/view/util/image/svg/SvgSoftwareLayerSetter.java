@@ -1,4 +1,4 @@
-package com.xpn.foodinfo.ui.util.image.svg;
+package com.xpn.foodinfo.view.util.image.svg;
 
 import android.graphics.drawable.PictureDrawable;
 import android.widget.ImageView;
