@@ -67,6 +67,7 @@
                 <include
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
                     layout="@layout/preferences_box"
                     app:viewModel="@{preferencesVM}" />
 

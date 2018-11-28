@@ -1,23 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
             name="viewModel"
             type="com.xpn.foodinfo.viewmodels.main.profile.PreferencesVM" />
     </data>
 
-    <LinearLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <TextView
+            android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="21dp"
+            android:paddingLeft="21dp"
+            android:paddingRight="21dp"
+            android:paddingBottom="8dp"
             android:text="Preferences"
-            android:padding="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             style="@style/TextAppearance.MaterialComponents.Headline6" />
 
 
-    </LinearLayout>
+        <!-- Energy -->
+        <TextView
+            android:id="@+id/energy_title"
+            android:text="Energy units:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title"
+            style="@style/PreferenceTextStyle" />
+        <Spinner
+            android:id="@+id/energy_chooser"
+            android:entries="@array/energy_units"
+            app:layout_constraintBottom_toBottomOf="@+id/energy_title"
+            app:layout_constraintStart_toEndOf="@+id/energy_title"
+            app:layout_constraintTop_toTopOf="@+id/energy_title"
+            style="@style/PreferenceChooserStyle" />
+
+
+        <!-- Mass -->
+        <TextView
+            android:id="@+id/mass_title"
+            android:text="Mass units:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/energy_title"
+            style="@style/PreferenceTextStyle" />
+        <Spinner
+            android:id="@+id/mass_chooser"
+            android:entries="@array/mass_units"
+            app:layout_constraintBottom_toBottomOf="@+id/mass_title"
+            app:layout_constraintStart_toStartOf="@+id/energy_chooser"
+            app:layout_constraintTop_toTopOf="@+id/mass_title"
+            style="@style/PreferenceChooserStyle" />
+
+
+        <!-- Volume -->
+        <TextView
+            android:id="@+id/volume_title"
+            android:text="Volume units:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mass_title"
+            style="@style/PreferenceTextStyle" />
+        <Spinner
+            android:id="@+id/volume_chooser"
+            android:entries="@array/volume_units"
+            app:layout_constraintBottom_toBottomOf="@+id/volume_title"
+            app:layout_constraintStart_toStartOf="@+id/energy_chooser"
+            app:layout_constraintTop_toTopOf="@+id/volume_title"
+            style="@style/PreferenceChooserStyle" />
+
+    </android.support.constraint.ConstraintLayout>
 </layout>
