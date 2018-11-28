@@ -29,6 +29,7 @@ public class Authentication {
                         .setLogo(R.mipmap.ic_launcher)
                         .setTheme(R.style.AppTheme_NoActionBar)
                         .setAlwaysShowSignInMethodScreen(true)
+                        .setIsSmartLockEnabled(false)
                         .build()
                         .setAction(Intent.ACTION_MAIN)
                         .addCategory(Intent.CATEGORY_HOME)

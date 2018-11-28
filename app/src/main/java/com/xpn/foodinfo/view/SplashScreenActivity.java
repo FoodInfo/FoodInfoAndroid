@@ -1,5 +1,6 @@
 package com.xpn.foodinfo.view;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +16,11 @@ import com.xpn.foodinfo.view.main.MainActivity;
 public class SplashScreenActivity extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 7701;
+
+    public static void start(Context context) {
+        Intent intent = new Intent(context, SplashScreenActivity.class);
+        context.startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

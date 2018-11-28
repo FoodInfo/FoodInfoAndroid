@@ -1,13 +1,12 @@
 package com.xpn.foodinfo.viewmodels.main;
 
-import android.arch.lifecycle.ViewModel;
-
+import com.xpn.foodinfo.viewmodels.BaseViewModel;
 import com.xpn.foodinfo.viewmodels.util.SingleLiveEvent;
 
 import timber.log.Timber;
 
 
-public class MainVM extends ViewModel {
+public class MainVM extends BaseViewModel {
 
     private SingleLiveEvent <Void> launchCamera = new SingleLiveEvent<>();
 
