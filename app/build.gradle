@@ -86,6 +86,14 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'  // Glide - Annotation processor
     implementation 'com.mikhaellopez:circularimageview:3.2.0'       // Circle ImageView
 
+    // Dependency injection - Dagger 2
+    implementation 'com.google.dagger:dagger:2.19'
+    implementation 'com.google.dagger:dagger-android:2.19'
+    implementation 'com.google.dagger:dagger-android-support:2.19'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.19'
+    annotationProcessor 'com.google.dagger:dagger-android-processor:2.19'
+
+
     // test
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
