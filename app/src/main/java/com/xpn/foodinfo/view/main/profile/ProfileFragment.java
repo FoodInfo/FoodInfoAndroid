@@ -16,21 +16,24 @@ import com.firebase.ui.auth.AuthUI;
 import com.xpn.foodinfo.R;
 import com.xpn.foodinfo.databinding.ProfileFragmentBinding;
 import com.xpn.foodinfo.view.SplashScreenActivity;
+import com.xpn.foodinfo.viewmodels.main.profile.PreferencesVM;
 import com.xpn.foodinfo.viewmodels.main.profile.ProfileVM;
 
 
 public class ProfileFragment extends Fragment {
 
-    private ProfileVM viewModel;
+    private ProfileVM profileVM;
+    private PreferencesVM preferencesVM;
     private ProfileFragmentBinding binding;
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.profile_fragment, container, false);
-        viewModel = ViewModelProviders.of(this).get(ProfileVM.class);
+        profileVM = ViewModelProviders.of(this).get(ProfileVM.class);
+        preferencesVM = ViewModelProviders.of(this).get(PreferencesVM.class);
 
-        binding.setViewModel(viewModel);
+        binding.setProfileVM(profileVM);
+        binding.setPreferencesVM(preferencesVM);
         return binding.getRoot();
     }
 
@@ -38,15 +41,17 @@ public class ProfileFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        viewModel.onSignOutListener().observe(this, o -> {
-            Activity parentActivity = getActivity();
-            assert parentActivity != null;
+        profileVM.onSignOutListener().observe(this, o -> signOut());
+    }
 
-            AuthUI.getInstance().signOut(parentActivity).addOnSuccessListener(task -> {
-                Toast.makeText(parentActivity, "Signed out", Toast.LENGTH_SHORT).show();
-                SplashScreenActivity.start(parentActivity);
-                parentActivity.finish();
-            });
+    private void signOut() {
+        Activity parentActivity = getActivity();
+        assert parentActivity != null;
+
+        AuthUI.getInstance().signOut(parentActivity).addOnSuccessListener(task -> {
+            Toast.makeText(parentActivity, "Signed out", Toast.LENGTH_SHORT).show();
+            SplashScreenActivity.start(parentActivity);
+            parentActivity.finish();
         });
     }
 }
