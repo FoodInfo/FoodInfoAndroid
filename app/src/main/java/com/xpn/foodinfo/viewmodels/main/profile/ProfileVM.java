@@ -2,44 +2,33 @@ package com.xpn.foodinfo.viewmodels.main.profile;
 
 import android.databinding.Bindable;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
+import com.xpn.foodinfo.BR;
+import com.xpn.foodinfo.models.User;
 import com.xpn.foodinfo.viewmodels.BaseViewModel;
 import com.xpn.foodinfo.viewmodels.util.SingleLiveEvent;
-import com.xpn.foodinfo.BR;
 
 
 public class ProfileVM extends BaseViewModel {
-    private final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    private State navigationState = State.COLLAPSED;
-    private SingleLiveEvent<Void> signOut = new SingleLiveEvent<>();
+    private final SingleLiveEvent<Void> signOut = new SingleLiveEvent<>();
+    private final User user;
+    private State navigationState;
+
+    ProfileVM(User user, State navigationState) {
+        this.user = user;
+        this.navigationState = navigationState;
+    }
 
 
     public String getUserEmail() {
-        if( user == null ) {
-            onSignOut();
-            return "";
-        }
         return user.getEmail();
     }
 
     public String getUserName() {
-        if( user == null ) {
-            onSignOut();
-            return "";
-        }
         return user.getDisplayName();
     }
 
     public String getPhotoUrl() {
-        if( user == null ) {
-            onSignOut();
-            return "";
-        }
-        if( user.getPhotoUrl() == null )
-            return "error";
-        return user.getPhotoUrl().toString();
+        return user.getPhotoUrl();
     }
 
 

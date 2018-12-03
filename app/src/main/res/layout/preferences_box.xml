@@ -6,6 +6,7 @@
         <variable
             name="viewModel"
             type="com.xpn.foodinfo.viewmodels.main.profile.PreferencesVM" />
+        <import type="com.xpn.foodinfo.viewmodels.main.profile.PreferencesVM.PreferenceTag" />
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -37,6 +38,9 @@
         <Spinner
             android:id="@+id/energy_chooser"
             android:entries="@array/energy_units"
+            android:onItemSelected="@{(parent, view, pos, id) -> viewModel.onPreferenceSelected(PreferenceTag.ENERGY, pos)}"
+            android:clickable="@{viewModel.getIsPreferenceLoaded(PreferenceTag.ENERGY)}"
+            app:enabled="@{viewModel.getIsPreferenceLoaded(PreferenceTag.ENERGY)}"
             app:layout_constraintBottom_toBottomOf="@+id/energy_title"
             app:layout_constraintStart_toEndOf="@+id/energy_title"
             app:layout_constraintTop_toTopOf="@+id/energy_title"
@@ -53,6 +57,9 @@
         <Spinner
             android:id="@+id/mass_chooser"
             android:entries="@array/mass_units"
+            android:onItemSelected="@{(parent, view, pos, id) -> viewModel.onPreferenceSelected(PreferenceTag.MASS, pos)}"
+            android:clickable="@{viewModel.getIsPreferenceLoaded(PreferenceTag.MASS)}"
+            app:enabled="@{viewModel.getIsPreferenceLoaded(PreferenceTag.MASS)}"
             app:layout_constraintBottom_toBottomOf="@+id/mass_title"
             app:layout_constraintStart_toStartOf="@+id/energy_chooser"
             app:layout_constraintTop_toTopOf="@+id/mass_title"
@@ -69,6 +76,9 @@
         <Spinner
             android:id="@+id/volume_chooser"
             android:entries="@array/volume_units"
+            android:onItemSelected="@{(parent, view, pos, id) -> viewModel.onPreferenceSelected(PreferenceTag.VOLUME, pos)}"
+            android:clickable="@{viewModel.getIsPreferenceLoaded(PreferenceTag.VOLUME)}"
+            app:enabled="@{viewModel.getIsPreferenceLoaded(PreferenceTag.VOLUME)}"
             app:layout_constraintBottom_toBottomOf="@+id/volume_title"
             app:layout_constraintStart_toStartOf="@+id/energy_chooser"
             app:layout_constraintTop_toTopOf="@+id/volume_title"

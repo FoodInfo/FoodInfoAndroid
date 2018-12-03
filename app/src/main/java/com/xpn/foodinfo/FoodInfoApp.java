@@ -12,6 +12,8 @@ import timber.log.Timber;
 
 public class FoodInfoApp extends Application {
 
+    private Dependency dependency;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -23,11 +25,18 @@ public class FoodInfoApp extends Application {
 
         // Initialize logger
         Timber.plant(new Timber.DebugTree());
+
+        // Initialize dependencies
+        dependency = new Dependency(this);
     }
 
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         MultiDex.install(this);
+    }
+
+    public Dependency getDependency() {
+        return dependency;
     }
 }

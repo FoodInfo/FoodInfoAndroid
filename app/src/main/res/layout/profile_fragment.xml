@@ -59,12 +59,14 @@
                 android:orientation="vertical">
 
                 <include
+                    android:id="@+id/profile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     layout="@layout/profile_box"
                     app:viewModel="@{profileVM}" />
 
                 <include
+                    android:id="@+id/preferences"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
