@@ -6,12 +6,25 @@ import android.databinding.Observable;
 import android.databinding.PropertyChangeRegistry;
 import android.support.annotation.NonNull;
 
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+
 
 public class BaseViewModel extends ViewModel implements Observable {
 
+    protected CompositeDisposable subscriptions = new CompositeDisposable();
     private transient PropertyChangeRegistry mCallbacks;
 
     public BaseViewModel() {
+    }
+
+    @Override
+    protected void onCleared() {
+        subscriptions.dispose();
+        super.onCleared();
+    }
+    protected void addSubscription(Disposable subscription) {
+        subscriptions.add(subscription);
     }
 
     @Override

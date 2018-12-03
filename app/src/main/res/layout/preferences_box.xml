@@ -37,7 +37,7 @@
             style="@style/PreferenceTextStyle" />
         <Spinner
             android:id="@+id/energy_chooser"
-            android:entries="@array/energy_units"
+            android:entries="@{viewModel.getPreferenceList(PreferenceTag.ENERGY)}"
             android:onItemSelected="@{(parent, view, pos, id) -> viewModel.onPreferenceSelected(PreferenceTag.ENERGY, pos)}"
             android:clickable="@{viewModel.getIsPreferenceLoaded(PreferenceTag.ENERGY)}"
             app:enabled="@{viewModel.getIsPreferenceLoaded(PreferenceTag.ENERGY)}"
@@ -56,7 +56,7 @@
             style="@style/PreferenceTextStyle" />
         <Spinner
             android:id="@+id/mass_chooser"
-            android:entries="@array/mass_units"
+            android:entries="@{viewModel.getPreferenceList(PreferenceTag.MASS)}"
             android:onItemSelected="@{(parent, view, pos, id) -> viewModel.onPreferenceSelected(PreferenceTag.MASS, pos)}"
             android:clickable="@{viewModel.getIsPreferenceLoaded(PreferenceTag.MASS)}"
             app:enabled="@{viewModel.getIsPreferenceLoaded(PreferenceTag.MASS)}"
@@ -75,7 +75,7 @@
             style="@style/PreferenceTextStyle" />
         <Spinner
             android:id="@+id/volume_chooser"
-            android:entries="@array/volume_units"
+            android:entries="@{viewModel.getPreferenceList(PreferenceTag.VOLUME)}"
             android:onItemSelected="@{(parent, view, pos, id) -> viewModel.onPreferenceSelected(PreferenceTag.VOLUME, pos)}"
             android:clickable="@{viewModel.getIsPreferenceLoaded(PreferenceTag.VOLUME)}"
             app:enabled="@{viewModel.getIsPreferenceLoaded(PreferenceTag.VOLUME)}"
