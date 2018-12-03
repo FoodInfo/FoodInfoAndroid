@@ -34,27 +34,35 @@ public class PreferencesVM extends BaseViewModel {
     public List <String> getPreferenceList(PreferenceTag preference) {
         return availablePreferences.get(preference);
     }
+    public Integer getCurrentPreferenceId(PreferenceTag preference) {
+        if(!currentPreference.containsKey(preference))
+            return null;
+        String current = currentPreference.get(preference).getPreference();
+        List <String> preferenceList = getPreferenceList(preference);
+        return preferenceList.indexOf(current);
+    }
+    public boolean isPreferenceLoaded(PreferenceTag tag) {
+        return currentPreference.containsKey(tag);
+    }
 
+    private void setPreference(Preference preference) {
+        currentPreference.put(PreferenceTag.fromTag(preference.getTag()), preference);
+        notifyChange();
+    }
     public void onPreferenceSelected(PreferenceTag tag, int preferenceId) {
         String preference = Objects.requireNonNull(availablePreferences.get(tag)).get(preferenceId);
-        setPreference(new Preference(tag.tag, preference));
+        updatePreference(new Preference(tag.tag, preference));
     }
-    private void setPreference(Preference preference) {
+    private void updatePreference(Preference preference) {
         addSubscription(
                 preferenceService.save(preference)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
-                                () -> Timber.d("%s: OK!", preference.toString()),
+                                () -> setPreference(preference),
                                 Timber::e
                         )
         );
-        currentPreference.put(PreferenceTag.fromTag(preference.getTag()), preference);
-        notifyChange();
-        Timber.d(preference.toString());
-    }
-    public boolean getIsPreferenceLoaded(PreferenceTag tag) {
-        return currentPreference.containsKey(tag);
     }
 
 
