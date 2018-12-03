@@ -7,7 +7,6 @@ import com.xpn.foodinfo.services.preference.PreferenceService;
 
 import io.reactivex.Completable;
 import io.reactivex.Single;
-import timber.log.Timber;
 
 
 public class SharedPrefPreferenceService implements PreferenceService {
@@ -23,7 +22,6 @@ public class SharedPrefPreferenceService implements PreferenceService {
             SharedPreferences.Editor editor = storage.edit();
             editor.putString( preference.getTag(), preference.getPreference() );
             editor.apply();
-            Timber.d("SharedPrefPreferenceService::save");
         }));
     }
 

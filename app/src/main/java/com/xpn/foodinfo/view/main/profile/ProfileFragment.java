@@ -34,8 +34,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import timber.log.Timber;
-
 
 public class ProfileFragment extends Fragment {
 
@@ -52,7 +50,6 @@ public class ProfileFragment extends Fragment {
                 new DefaultMapEntry<>(PreferencesVM.PreferenceTag.MASS, Arrays.asList(getResources().getStringArray(R.array.mass_units))),
                 new DefaultMapEntry<>(PreferencesVM.PreferenceTag.VOLUME, Arrays.asList(getResources().getStringArray(R.array.volume_units))),
         });
-        Timber.d(availablePreferences.toString());
 
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if(currentUser == null ) {
