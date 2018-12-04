@@ -10,7 +10,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
@@ -79,7 +78,6 @@ public class ProfileFragment extends Fragment {
         assert parentActivity != null;
 
         AuthUI.getInstance().signOut(parentActivity).addOnSuccessListener(task -> {
-            Toast.makeText(parentActivity, "Signed out", Toast.LENGTH_SHORT).show();
             SplashScreenActivity.start(parentActivity);
             parentActivity.finish();
         });

@@ -19,7 +19,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".view.SplashScreenActivity"
             android:label="@string/title_activity_splash_screen"
@@ -41,6 +40,12 @@
             android:name=".view.main.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".view.camera.CameraActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" />
+
 
     </application>
 
