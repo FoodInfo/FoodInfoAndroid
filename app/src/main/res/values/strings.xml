@@ -28,11 +28,13 @@
         <item>Ounce</item>
     </string-array>
 
-    <string name="about_app">Track calories and vitamins.</string>
-    <string name="about_author">© 2018 <a href="https://github.com/FoodInfo">XPN Inc.</a>\nAll Rights Reserved.</string>
 
     <string name="action_app_info">App Info</string>
     <string name="action_overflow_menu">More options</string>
     <string name="action_privacy_policy">Privacy policy</string>
     <string name="action_open_source_licenses">Open source licenses</string>
+
+
+    <string name="about_app">Track calories and vitamins.</string>
+    <string name="about_author">© 2018 <a href="https://github.com/FoodInfo">XPN Inc.</a>\nAll Rights Reserved.</string>
 </resources>
