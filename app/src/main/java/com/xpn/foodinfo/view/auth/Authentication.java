@@ -24,8 +24,8 @@ public class Authentication {
                 AuthUI.getInstance()
                         .createSignInIntentBuilder()
                         .setAvailableProviders(providers)
-                        .setTosAndPrivacyPolicyUrls("https://foodinfo.github.io/FoodInfoAndroid/terms_and_conditions",
-                                                    "https://foodinfo.github.io/FoodInfoAndroid/privacy_policy")
+                        .setTosAndPrivacyPolicyUrls(activity.getString(R.string.terms_and_conditions_url),
+                                                    activity.getString(R.string.privacy_policy_url))
                         .setLogo(R.mipmap.ic_launcher)
                         .setTheme(R.style.AppTheme_NoActionBar)
                         .setAlwaysShowSignInMethodScreen(true)

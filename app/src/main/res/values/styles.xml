@@ -17,9 +17,9 @@
         <item name="android:windowBackground">@drawable/splash_screen_background</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.ActionBar" />
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat" />
 
 
     <style name="PreferenceTextStyle" parent="TextAppearance.MaterialComponents.Subtitle2">
@@ -35,6 +35,11 @@
         <item name="android:paddingRight">0dp</item>
         <item name="android:minWidth">160dp</item>
         <item name="android:drawSelectorOnTop">false</item>
+    </style>
+
+    <style name="CollapsingToolbarLayoutExpandedTextStyle" parent="AppTheme">
+        <item name="android:textColor">@android:color/transparent</item>
+        <item name="android:textSize">0sp</item>
     </style>
 
 </resources>
