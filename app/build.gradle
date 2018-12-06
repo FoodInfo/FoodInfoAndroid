@@ -59,17 +59,20 @@ dependencies {
     implementation 'android.arch.lifecycle:extensions:1.1.1'
 
     /// Firebase
-    implementation 'com.google.firebase:firebase-core:16.0.4'       // Analytics
+    implementation 'com.google.firebase:firebase-core:16.0.6'       // Analytics
 //    implementation 'com.google.firebase:firebase-ads:17.0.0'        // Ads
-    implementation 'com.google.firebase:firebase-storage:16.0.4'    // Storage
-    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.5'  // Crashlytics
-    implementation 'com.google.firebase:firebase-perf:16.2.0'       // Performance
+    implementation 'com.google.firebase:firebase-database:16.0.5'   // Database
+    implementation 'com.google.firebase:firebase-storage:16.0.5'    // Storage
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.7'  // Crashlytics
+    implementation 'com.google.firebase:firebase-perf:16.2.2'       // Performance
 
     // Authentication
     implementation 'com.firebaseui:firebase-ui-auth:4.2.1'              // UI for Authentication
     implementation 'com.facebook.android:facebook-android-sdk:4.38.1'   // Facebook Authentication
     implementation 'com.twitter.sdk.android:twitter-core:3.2.0'         // Twitter Authentication
 
+
+    // Logic utilities
     implementation 'com.anjlab.android.iab.v3:library:1.0.44'       // Billing
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'           // RxAndroid
     implementation 'io.reactivex.rxjava2:rxjava:2.2.4'              // RxJAVA
@@ -86,6 +89,8 @@ dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.4'                   // Lombok - cleaner models
     annotationProcessor 'org.projectlombok:lombok:1.18.4'           // Lombok annotation processor
 
+
+    // View utilities
     implementation 'com.otaliastudios:cameraview:1.6.0'             // Camera View
     implementation 'com.caverock:androidsvg-aar:1.3'                // SVG for Android
     implementation 'com.github.bumptech.glide:glide:4.8.0'          // Glide - Image loader
