@@ -28,7 +28,7 @@
             android:layout_alignParentLeft="true"
             android:contentDescription="Profile Picture"
             app:placeholder="@{@drawable/ic_placeholder}"
-            app:imageUrl="@{viewModel.photoUrl}"
+            app:url="@{viewModel.photoUrl}"
             app:civ_border_color="@android:color/white"
             app:civ_border_width="3dp"
             app:civ_shadow="true"
@@ -79,9 +79,9 @@
                 android:id="@+id/expand"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_expand"
                 android:visibility="@{viewModel.navigationState == State.COLLAPSED ? View.VISIBLE : View.GONE}"
-                android:contentDescription="Expand" />
+                android:contentDescription="Expand"
+                app:srcCompat="@drawable/ic_expand" />
 
             <ImageView
                 android:id="@+id/collapse"
@@ -92,8 +92,8 @@
                 android:layout_marginStart="0dp"
                 android:layout_marginLeft="0dp"
                 android:contentDescription="Collapse"
-                android:src="@drawable/ic_collapse"
-                android:visibility="@{viewModel.navigationState == State.EXPANDED ? View.VISIBLE : View.GONE}" />
+                android:visibility="@{viewModel.navigationState == State.EXPANDED ? View.VISIBLE : View.GONE}"
+                app:srcCompat="@drawable/ic_collapse" />
         </RelativeLayout>
 
         <Button

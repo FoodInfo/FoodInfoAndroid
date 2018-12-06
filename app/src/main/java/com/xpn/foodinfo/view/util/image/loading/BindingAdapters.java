@@ -2,53 +2,69 @@ package com.xpn.foodinfo.view.util.image.loading;
 
 import android.databinding.BindingAdapter;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.PictureDrawable;
+import android.net.Uri;
+import android.support.annotation.Nullable;
 import android.widget.ImageView;
 
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.Target;
 import com.xpn.foodinfo.GlideApp;
+import com.xpn.foodinfo.GlideRequest;
 import com.xpn.foodinfo.view.util.image.svg.SvgSoftwareLayerSetter;
+import com.xpn.foodinfo.view.util.image.transformation.CompressTransformation;
+import com.xpn.foodinfo.view.util.image.transformation.RotateTransformation;
 
 
 public class BindingAdapters {
 
-    @BindingAdapter({"imageUrl", "placeholder"})
-    public static void loadImage(ImageView imageView, String url, Drawable placeholder) {
-        if( url.contains( ".svg" ) )
-            GlideApp.with(imageView)
-                    .as(PictureDrawable.class)
-                    .listener(new SvgSoftwareLayerSetter())
-                    .load(url)
-                    .placeholder(placeholder)
-                    .error(placeholder)
-                    .centerInside()
-                    .into(imageView);
-        else
-            GlideApp.with(imageView)
-                    .load(url)
-                    .placeholder(placeholder)
-                    .error(placeholder)
-                    .centerInside()
-                    .into(imageView);
+    public interface ImageListener {
+        void onImageLoaded(Bitmap image);
+        void onFailure(Exception e);
     }
 
+    @BindingAdapter(value={"url", "uri", "imageData", "rotationDegrees", "compressQuality", "placeholder", "listener"}, requireAll=false)
+    public static void loadImage(ImageView imageView,
+                                 String url, Uri uri, byte[] imageData, Integer rotationDegrees,
+                                 Integer compressQuality,
+                                 Drawable placeholder,
+                                 ImageListener listener) {
+        GlideRequest <Bitmap> request;
+        if( url != null ) {
+            if( !url.contains( ".svg" ) )
+                request = GlideApp.with(imageView).asBitmap().load(url);
+            else
+                request = GlideApp.with(imageView)
+                        .asBitmap()
+                        .listener(new SvgSoftwareLayerSetter());
+        }
+        else if( uri != null )          request = GlideApp.with(imageView).asBitmap().load(uri);
+        else if( imageData != null )    request = GlideApp.with(imageView).asBitmap().load(imageData);
+        else                            request = GlideApp.with(imageView).asBitmap().load("error");
 
-    @BindingAdapter("android:src")
-    public static void setImageResource(ImageView imageView, int resource){
-        imageView.setImageResource(resource);
-    }
+        if( rotationDegrees != null )   request = request.apply(RequestOptions.bitmapTransform(new RotateTransformation(rotationDegrees)));
+        if( compressQuality != null )   request = request.apply(RequestOptions.bitmapTransform(new CompressTransformation(compressQuality)));
+        if( placeholder != null )       request = request.placeholder(placeholder).error(placeholder);
 
-    @BindingAdapter("src")
-    public static void loadImage(ImageView imageView, Bitmap bitmap) {
-        imageView.setImageBitmap(bitmap);
-    }
+        if( listener != null ) {
+            request = request.listener(new RequestListener<Bitmap>() {
+                @Override
+                public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
+                    listener.onFailure(e);
+                    return false;
+                }
 
-    @BindingAdapter("src")
-    public static void loadImage(ImageView imageView, byte[] image) {
-        if( image == null )
-            return;
-        Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
-        imageView.setImageBitmap(bitmap);
+                @Override
+                public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
+                    listener.onImageLoaded(resource);
+                    return false;
+                }
+            });
+        }
+
+        request.into(imageView);
     }
 }
