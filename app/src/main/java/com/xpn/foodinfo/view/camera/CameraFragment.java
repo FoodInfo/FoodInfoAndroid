@@ -59,7 +59,7 @@ public class CameraFragment extends Fragment {
         super.onStart();
         viewModel.onClearImageListener().observe(this, o -> {});
         viewModel.onCloseListener().observe(this, o -> contract.onCloseCamera());
-        viewModel.onCaptureImageListener().observe(this, o -> binding.camera.capturePicture());
+        viewModel.onCaptureImageListener().observe(this, o -> binding.camera.captureSnapshot());
         viewModel.onChooseFromGalleryListener().observe(this, o -> Util.chooseImageFromGallery(this, PICK_IMAGE_REQUEST_CODE));
     }
 

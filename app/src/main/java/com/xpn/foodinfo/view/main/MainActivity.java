@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.xpn.foodinfo.R;
 import com.xpn.foodinfo.databinding.ActivityMainBinding;
 import com.xpn.foodinfo.view.camera.CameraActivity;
+import com.xpn.foodinfo.view.main.home.HomeFragment;
 import com.xpn.foodinfo.view.main.profile.ProfileFragment;
 import com.xpn.foodinfo.viewmodels.main.MainVM;
 
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         binding.navigation.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
+                    showFragment(new HomeFragment());
                     return true;
                 case R.id.navigation_journal:
                     return true;
