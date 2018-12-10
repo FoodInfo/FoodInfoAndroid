@@ -77,8 +77,7 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'           // RxAndroid
     implementation 'io.reactivex.rxjava2:rxjava:2.2.4'              // RxJAVA
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'          // Retrofit for HTTP requests
-    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
-    // Retrofit Gson for parsing json
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'    // Retrofit Gson for parsing json
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'   // Retrofit adapter for Rx
     implementation 'com.jakewharton.timber:timber:4.7.1'            // Logger
     implementation 'com.annimon:stream:1.2.1'                       // Stream API
