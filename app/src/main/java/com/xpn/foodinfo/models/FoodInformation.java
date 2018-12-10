@@ -11,7 +11,6 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 public class FoodInformation {
-    private final String foodName;
     private final List<Nutrient> nutrients;
 
     @Data

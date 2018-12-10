@@ -19,7 +19,7 @@ import com.xpn.foodinfo.Dependency;
 import com.xpn.foodinfo.FoodInfoApp;
 import com.xpn.foodinfo.R;
 import com.xpn.foodinfo.databinding.ActivityCameraBinding;
-import com.xpn.foodinfo.util.Time;
+import com.xpn.foodinfo.util.DateTimeUtil;
 import com.xpn.foodinfo.viewmodels.camera.CameraVM;
 import com.xpn.foodinfo.viewmodels.camera.CameraVMFactory;
 
@@ -50,7 +50,7 @@ public class CameraActivity extends AppCompatActivity implements CameraFragment.
         binding = DataBindingUtil.setContentView(this, R.layout.activity_camera);
         Dependency dependency = ((FoodInfoApp) getApplication()).getDependency();
 
-        viewModel = ViewModelProviders.of(this, new CameraVMFactory(dependency.getImageUploadingService())).get(CameraVM.class);
+        viewModel = ViewModelProviders.of(this, new CameraVMFactory(dependency.getUserService(), dependency.getImageService())).get(CameraVM.class);
         binding.setViewModel(viewModel);
         onShowCamera();
     }
@@ -89,7 +89,7 @@ public class CameraActivity extends AppCompatActivity implements CameraFragment.
 
         File photoFile;
         try {
-            String imageFileName = "capture_" + Time.getDateInIso(new Date()) + "_";
+            String imageFileName = "capture_" + DateTimeUtil.dateToISO(new Date()) + "_";
             File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
             photoFile = File.createTempFile(imageFileName, ".jpg", storageDir);
         }

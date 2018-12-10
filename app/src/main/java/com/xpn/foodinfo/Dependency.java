@@ -7,10 +7,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.xpn.foodinfo.repositories.image.FirebaseImageUploadingService;
+import com.xpn.foodinfo.repositories.image.FirebaseImageService;
 import com.xpn.foodinfo.repositories.preference.local.SharedPrefPreferenceService;
 import com.xpn.foodinfo.repositories.user.FirebaseUserService;
-import com.xpn.foodinfo.services.image.ImageUploadingService;
+import com.xpn.foodinfo.services.image.ImageService;
 import com.xpn.foodinfo.services.preference.PreferenceService;
 import com.xpn.foodinfo.services.user.UserService;
 
@@ -23,7 +23,7 @@ public class Dependency {
 
     @Getter private final PreferenceService preferenceService;
     @Getter private final UserService userService;
-    @Getter private final ImageUploadingService imageUploadingService;
+    @Getter private final ImageService imageService;
 
     Dependency(Context context) {
         final SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFS_NAME, Context.MODE_PRIVATE);
@@ -32,6 +32,6 @@ public class Dependency {
 
         this.preferenceService = new SharedPrefPreferenceService(sharedPreferences);
         this.userService = new FirebaseUserService();
-        this.imageUploadingService = new FirebaseImageUploadingService(imageStorageReference, imageDatabaseReference, userService);
+        this.imageService = new FirebaseImageService(imageStorageReference, imageDatabaseReference);
     }
 }

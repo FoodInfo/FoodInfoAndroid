@@ -12,4 +12,5 @@ public class Image {
     private final String name;
     private final String uploaderId;
     private final String downloadUrl;
+    private final String dateCaptured;
 }

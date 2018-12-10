@@ -5,9 +5,12 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 
 import com.xpn.foodinfo.BR;
-import com.xpn.foodinfo.services.image.ImageUploadingService;
+import com.xpn.foodinfo.services.image.ImageService;
+import com.xpn.foodinfo.services.user.UserService;
 import com.xpn.foodinfo.view.util.image.loading.BindingAdapters;
 import com.xpn.foodinfo.viewmodels.BaseViewModel;
+
+import java.util.Date;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -18,7 +21,8 @@ import timber.log.Timber;
 @RequiredArgsConstructor
 public class CameraVM extends BaseViewModel implements BindingAdapters.ImageListener {
 
-    private final ImageUploadingService imageUploadingService;
+    private final UserService userService;
+    private final ImageService imageService;
 
 
     private State state = State.CAPTURING;
@@ -73,8 +77,8 @@ public class CameraVM extends BaseViewModel implements BindingAdapters.ImageList
         String uriString = imageUri.toString();
         String imageName = uriString.substring( uriString.lastIndexOf('/')+1);
         addSubscription(
-                imageUploadingService.upload(imageName, imageUri)
-                        .flatMap(image -> imageUploadingService.add(image).toSingleDefault(true))
+                imageService.upload(userService.getCurrentUser(), imageName, new Date(), imageUri)
+                        .flatMap(image -> imageService.add(image).toSingleDefault(true))
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
