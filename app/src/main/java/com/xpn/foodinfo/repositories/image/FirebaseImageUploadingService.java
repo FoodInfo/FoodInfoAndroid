@@ -2,7 +2,6 @@ package com.xpn.foodinfo.repositories.image;
 
 import android.net.Uri;
 
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.storage.StorageReference;
 import com.xpn.foodinfo.models.Image;
@@ -16,6 +15,7 @@ import io.reactivex.Completable;
 import io.reactivex.Single;
 import io.reactivex.SingleOnSubscribe;
 import lombok.AllArgsConstructor;
+import timber.log.Timber;
 
 
 @AllArgsConstructor
@@ -33,10 +33,10 @@ public class FirebaseImageUploadingService implements ImageUploadingService {
                     .child(currentUser.getId())
                     .child(imageName);
 
-            
             return RxFirebaseStorage.putFile(currentImageReference, uri)
-                    .flatMap(snapshot -> Single.create((SingleOnSubscribe<Task<Uri>>) emitter -> currentImageReference.getDownloadUrl()))
-                    .flatMap(task -> Single.just(task.getResult()))
+                    .flatMap(snapshot -> Single.create((SingleOnSubscribe<Uri>) emitter -> currentImageReference.getDownloadUrl()
+                            .addOnSuccessListener(emitter::onSuccess)
+                            .addOnFailureListener(emitter::onError)))
                     .flatMap(downloadUri -> Single.just(new Image(imageName, currentUser.getId(), downloadUri.toString())));
         });
     }
