@@ -15,6 +15,8 @@ import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import com.xpn.foodinfo.Dependency;
+import com.xpn.foodinfo.FoodInfoApp;
 import com.xpn.foodinfo.R;
 import com.xpn.foodinfo.databinding.ActivityCameraBinding;
 import com.xpn.foodinfo.util.Time;
@@ -46,7 +48,9 @@ public class CameraActivity extends AppCompatActivity implements CameraFragment.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_camera);
-        viewModel = ViewModelProviders.of(this, new CameraVMFactory()).get(CameraVM.class);
+        Dependency dependency = ((FoodInfoApp) getApplication()).getDependency();
+
+        viewModel = ViewModelProviders.of(this, new CameraVMFactory(dependency.getImageUploadingService())).get(CameraVM.class);
         binding.setViewModel(viewModel);
         onShowCamera();
     }

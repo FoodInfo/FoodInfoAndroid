@@ -5,13 +5,23 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 
 import com.xpn.foodinfo.BR;
+import com.xpn.foodinfo.services.image.ImageUploadingService;
 import com.xpn.foodinfo.view.util.image.loading.BindingAdapters;
 import com.xpn.foodinfo.viewmodels.BaseViewModel;
 
+import java.util.concurrent.Callable;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+import lombok.RequiredArgsConstructor;
 import timber.log.Timber;
 
 
+@RequiredArgsConstructor
 public class CameraVM extends BaseViewModel implements BindingAdapters.ImageListener {
+
+    private final ImageUploadingService imageUploadingService;
+
 
     private State state = State.CAPTURING;
     private String imageUrl;
@@ -57,6 +67,23 @@ public class CameraVM extends BaseViewModel implements BindingAdapters.ImageList
         this.imageUri = imageUri;
         setState(State.LOADING_IMAGE);
         notifyPropertyChanged(BR.imageUri);
+
+        uploadImage(imageUri);
+    }
+
+    private void uploadImage(Uri imageUri) {
+        Timber.e("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!YOYOYOYO!!!!!");
+        String uriString = imageUri.toString();
+        String imageName = uriString.substring( uriString.lastIndexOf('/')+1);
+        addSubscription(
+                imageUploadingService.upload(imageName, imageUri)
+                        .flatMap(image -> imageUploadingService.add(image).toSingle(() -> null))
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
+                                obs -> Timber.e("Uploaded and inserted into the database: %s", imageName),
+                                Timber::e
+                        ));
     }
 
 
@@ -79,13 +106,11 @@ public class CameraVM extends BaseViewModel implements BindingAdapters.ImageList
 
     @Override
     public void onImageLoaded(Bitmap image) {
-        Timber.e("IMAGE LOADED!!!!!!!!!!!!!!!!!!!!!!!!");
         setState(State.ANALYZING_IMAGE);
     }
 
     @Override
     public void onFailure(Exception e) {
-        Timber.e("IMAGE LOAD FAILED!!!!!!!!!!!!!!!!!!!!!!!!");
         setState(State.CAPTURING);
     }
 
