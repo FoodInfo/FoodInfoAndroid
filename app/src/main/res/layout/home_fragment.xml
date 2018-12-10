@@ -16,6 +16,7 @@
             android:layout_height="wrap_content">
 
             <android.support.design.widget.CollapsingToolbarLayout
+                android:id="@+id/collapsing_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:expandedTitleTextAppearance="@style/CollapsingToolbarLayoutExpandedTextStyle"
@@ -55,12 +56,14 @@
             android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <LinearLayout
+            <com.xpn.foodinfo.view.util.bindingrecyclerview.BindingRecyclerView
+                android:id="@+id/images"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-            </LinearLayout>
+                android:layout_height="match_parent"
+                android:scrollbars="vertical"
+                app:bindingVarPath="com.xpn.foodinfo.BR.viewModel"
+                app:itemLayoutResId="@layout/image_grid_item"
+                app:viewModelList="@{viewModel.imageVMs}" />
         </android.support.v4.widget.NestedScrollView>
 
     </android.support.design.widget.CoordinatorLayout>

@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
                     return false;
             }
         });
+        binding.navigation.setSelectedItemId(R.id.navigation_home);
     }
 
     @Override

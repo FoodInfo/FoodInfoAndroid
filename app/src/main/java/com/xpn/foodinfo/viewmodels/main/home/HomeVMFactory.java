@@ -4,8 +4,9 @@ import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 import android.support.annotation.NonNull;
 
-import com.google.firebase.auth.FirebaseUser;
-import com.xpn.foodinfo.models.User;
+import com.xpn.foodinfo.models.Image;
+import com.xpn.foodinfo.services.image.ImageService;
+import com.xpn.foodinfo.services.user.UserService;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,19 +15,13 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class HomeVMFactory implements ViewModelProvider.Factory {
-    private final User user;
-
-    public HomeVMFactory(FirebaseUser user) {
-        this(new User(user.getUid(),
-                user.getDisplayName(),
-                user.getEmail(),
-                user.getPhotoUrl() == null ? "error" : user.getPhotoUrl().toString()));
-    }
+    private final UserService userService;
+    private final ImageService imageService;
 
     @SuppressWarnings("unchecked")
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        return (T) new HomeVM(user);
+        return (T) new HomeVM(userService, imageService);
     }
 }

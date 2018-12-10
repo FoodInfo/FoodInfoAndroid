@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,6 +17,8 @@ import android.view.ViewGroup;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.xpn.foodinfo.Dependency;
+import com.xpn.foodinfo.FoodInfoApp;
 import com.xpn.foodinfo.R;
 import com.xpn.foodinfo.databinding.HomeFragmentBinding;
 import com.xpn.foodinfo.view.about.AboutActivity;
@@ -37,10 +40,14 @@ public class HomeFragment extends Fragment {
         setHasOptionsMenu(true);
         ((AppCompatActivity) Objects.requireNonNull(getActivity())).setSupportActionBar(binding.toolbar);
 
+        binding.images.setNestedScrollingEnabled(false);
+        binding.images.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
 
+
+        Dependency dependency = ((FoodInfoApp) getActivity().getApplication()).getDependency();
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         assert currentUser != null;
-        viewModel = ViewModelProviders.of(this, new HomeVMFactory(currentUser)).get(HomeVM.class);
+        viewModel = ViewModelProviders.of(this, new HomeVMFactory(dependency.getUserService(), dependency.getImageService())).get(HomeVM.class);
 
         binding.setViewModel(viewModel);
         return binding.getRoot();
