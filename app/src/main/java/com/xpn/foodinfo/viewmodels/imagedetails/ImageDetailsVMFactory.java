@@ -5,12 +5,14 @@ import android.arch.lifecycle.ViewModelProvider;
 import android.support.annotation.NonNull;
 
 import com.xpn.foodinfo.models.Image;
+import com.xpn.foodinfo.services.image.FoodImageProcessingService;
 
 import lombok.AllArgsConstructor;
 
 
 @AllArgsConstructor
 public class ImageDetailsVMFactory implements ViewModelProvider.Factory {
+    private final FoodImageProcessingService foodImageProcessingService;
     private final Image image;
 
 
@@ -18,6 +20,6 @@ public class ImageDetailsVMFactory implements ViewModelProvider.Factory {
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        return (T) new ImageDetailsVM(image);
+        return (T) new ImageDetailsVM(foodImageProcessingService, image);
     }
 }

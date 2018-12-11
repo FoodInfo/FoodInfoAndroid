@@ -5,6 +5,7 @@ import android.content.Context;
 import android.support.multidex.MultiDex;
 
 import com.crashlytics.android.Crashlytics;
+import com.google.android.gms.ads.MobileAds;
 
 import io.fabric.sdk.android.Fabric;
 import timber.log.Timber;
@@ -28,6 +29,9 @@ public class FoodInfoApp extends Application {
 
         // Initialize dependencies
         dependency = new Dependency(this);
+
+        // Initialize ads
+        MobileAds.initialize(this, getString(R.string.app_id));
     }
 
     @Override

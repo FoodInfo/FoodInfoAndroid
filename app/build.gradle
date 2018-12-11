@@ -61,7 +61,7 @@ dependencies {
     /// Firebase
     implementation 'com.github.FrangSierra:RxFirebase:1.5.6'        // Rx bindings for Firebase
     implementation 'com.google.firebase:firebase-core:16.0.6'       // Analytics
-//    implementation 'com.google.firebase:firebase-ads:17.0.0'        // Ads
+    implementation 'com.google.firebase:firebase-ads:17.1.2'        // Ads
     implementation 'com.google.firebase:firebase-database:16.0.5'   // Database
     implementation 'com.google.firebase:firebase-storage:16.0.5'    // Storage
     implementation 'com.crashlytics.sdk.android:crashlytics:2.9.7'  // Crashlytics

@@ -23,13 +23,26 @@
             android:background="@android:color/black"
             app:url="@{viewModel.downloadUrl}" />
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="16dp"
-            android:gravity="center|top"
-            android:text="Contents:"
-            android:textSize="31sp" />
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="Contents:"
+                android:textSize="31sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="12dp"
+                android:textStyle="bold"
+                android:text="@{viewModel.info}"
+                android:textSize="23sp" />
+        </LinearLayout>
     </com.sothree.slidinguppanel.SlidingUpPanelLayout>
 
 </layout>

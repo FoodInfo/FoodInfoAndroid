@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import com.xpn.foodinfo.Dependency;
+import com.xpn.foodinfo.FoodInfoApp;
 import com.xpn.foodinfo.R;
 import com.xpn.foodinfo.databinding.ActivityImageDetailsBinding;
 import com.xpn.foodinfo.models.Image;
@@ -33,8 +35,16 @@ public class ImageDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_image_details);
 
+        Dependency dependency = ((FoodInfoApp) getApplication()).getDependency();
         Image image = (Image) getIntent().getExtras().getSerializable(IMAGE_EXTRA);
-        viewModel = ViewModelProviders.of(this, new ImageDetailsVMFactory(image)).get(ImageDetailsVM.class);
+        viewModel = ViewModelProviders.of(this, new ImageDetailsVMFactory(dependency.getFoodImageProcessingService(), image)).get(ImageDetailsVM.class);
         binding.setViewModel(viewModel);
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        viewModel.onStart();
     }
 }
