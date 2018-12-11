@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -26,6 +27,8 @@ import com.xpn.foodinfo.viewmodels.main.home.HomeVM;
 import com.xpn.foodinfo.viewmodels.main.home.HomeVMFactory;
 
 import java.util.Objects;
+
+import static android.widget.GridLayout.VERTICAL;
 
 
 public class HomeFragment extends Fragment {
@@ -51,6 +54,12 @@ public class HomeFragment extends Fragment {
 
         binding.setViewModel(viewModel);
         return binding.getRoot();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        viewModel.onStart();
     }
 
     @Override

@@ -60,7 +60,7 @@
                 android:id="@+id/images"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scrollbars="vertical"
+                android:paddingBottom="77dp"
                 app:bindingVarPath="com.xpn.foodinfo.BR.viewModel"
                 app:itemLayoutResId="@layout/image_grid_item"
                 app:viewModelList="@{viewModel.imageVMs}" />

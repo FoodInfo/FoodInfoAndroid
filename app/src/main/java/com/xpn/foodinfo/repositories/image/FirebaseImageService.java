@@ -2,6 +2,7 @@ package com.xpn.foodinfo.repositories.image;
 
 import android.net.Uri;
 
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 import com.google.firebase.storage.StorageReference;
@@ -14,7 +15,6 @@ import java.util.Date;
 import java.util.List;
 
 import durdinapps.rxfirebase2.RxFirebaseDatabase;
-import durdinapps.rxfirebase2.RxFirebaseQuery;
 import durdinapps.rxfirebase2.RxFirebaseStorage;
 import io.reactivex.Completable;
 import io.reactivex.Observable;
@@ -25,14 +25,14 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class FirebaseImageService implements ImageService {
-    private final StorageReference imagesReference;
+    private final StorageReference imagesStorage;
     private final DatabaseReference imagesDatabase;
 
     @Override
     public Single<Image> upload(User currentUser, String imageName, Date dateCaptured, Uri uri) {
         return Single.defer(() -> {
             /// BASE_PATH/{userId}/imageName
-            final StorageReference currentImageReference = imagesReference
+            final StorageReference currentImageReference = imagesStorage
                     .child(currentUser.getId())
                     .child(imageName);
 
@@ -63,12 +63,12 @@ public class FirebaseImageService implements ImageService {
     @Override
     public Single<List<Image>> getImages(User user) {
         return Single.defer(() -> {
-            Query where = imagesDatabase.child("uploaderId").equalTo(user.getId()).orderByChild("dateCaptured");
-            return RxFirebaseQuery.getInstance()
-                    .filterByRefs(imagesDatabase, where)
-                    .asList()
-                    .flatMap(
-                            list -> Observable.fromIterable(list)
+            Query userImagesQuery = imagesDatabase.orderByChild("uploaderId").equalTo(user.getId());
+
+            return RxFirebaseDatabase.observeSingleValueEvent(userImagesQuery)
+                    .map(DataSnapshot::getChildren)
+                    .toSingle()
+                    .flatMap(list -> Observable.fromIterable(list)
                             .map(dataSnapshot -> dataSnapshot.getValue(Image.class))
                             .toList()
                     );

@@ -3,6 +3,7 @@ package com.xpn.foodinfo.view.util.bindingrecyclerview;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -18,9 +19,10 @@ public class BindingAdapter<VDB extends ViewDataBinding> extends RecyclerView.Ad
         this.layoutResId = layoutResId;
     }
 
+    @NonNull
     @Override
     @SuppressWarnings("unchecked")
-    public BindingHolder<VDB> onCreateViewHolder(ViewGroup parent, int viewType) {
+    public BindingHolder<VDB> onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         ViewDataBinding dataBinding = DataBindingUtil.inflate(
                 LayoutInflater.from(parent.getContext()),
                 layoutResId,
@@ -31,7 +33,7 @@ public class BindingAdapter<VDB extends ViewDataBinding> extends RecyclerView.Ad
     }
 
     @Override
-    public void onBindViewHolder(BindingHolder<VDB> holder, int position) {
+    public void onBindViewHolder(@NonNull BindingHolder<VDB> holder, int position) {
         vmProvider.onInitBinding(position, holder.getBinding());
     }
 

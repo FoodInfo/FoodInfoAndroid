@@ -13,4 +13,8 @@ public class Image {
     private final String uploaderId;
     private final String downloadUrl;
     private final String dateCaptured;
+
+    public Image() {
+        this(null, null, null, null);
+    }
 }
