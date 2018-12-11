@@ -1,24 +1,19 @@
 package com.xpn.foodinfo.viewmodels.main.home;
 
 import android.databinding.Bindable;
-import android.support.annotation.NonNull;
+import android.util.Pair;
+import android.view.View;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 import com.xpn.foodinfo.BR;
 import com.xpn.foodinfo.models.Image;
 import com.xpn.foodinfo.services.image.ImageService;
 import com.xpn.foodinfo.services.user.UserService;
 import com.xpn.foodinfo.viewmodels.BaseViewModel;
+import com.xpn.foodinfo.viewmodels.util.SingleLiveEvent;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import durdinapps.rxfirebase2.RxFirebaseDatabase;
-import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import lombok.RequiredArgsConstructor;
@@ -26,10 +21,11 @@ import timber.log.Timber;
 
 
 @RequiredArgsConstructor
-public class HomeVM extends BaseViewModel {
+public class HomeVM extends BaseViewModel implements ImageItemVM.Contract {
     private final UserService userService;
     private final ImageService imageService;
     private List <ImageItemVM> imageVMs = new ArrayList<>();
+    private SingleLiveEvent <Pair<View, Integer> > showPopupMenu = new SingleLiveEvent<>();
 
 
     public void onStart() {
@@ -59,9 +55,18 @@ public class HomeVM extends BaseViewModel {
     }
     private void setImageVMs(List<Image> images) {
         imageVMs.clear();
-        for( Image image : images ) {
-            imageVMs.add(new ImageItemVM(image));
+        for( int i=0; i < images.size(); ++i ) {
+            imageVMs.add(new ImageItemVM(i, images.get(i), this));
         }
         notifyPropertyChanged(BR.imageVMs);
+    }
+
+    @Override
+    public void onShowPopupMenu(View view, int id) {
+        showPopupMenu.setValue(new Pair<>(view, id));
+    }
+
+    public SingleLiveEvent <Pair<View, Integer> > showPopupMenuListener() {
+        return showPopupMenu;
     }
 }

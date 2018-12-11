@@ -1,5 +1,7 @@
 package com.xpn.foodinfo.viewmodels.main.home;
 
+import android.view.View;
+
 import com.xpn.foodinfo.models.Image;
 import com.xpn.foodinfo.util.DateTimeUtil;
 import com.xpn.foodinfo.viewmodels.BaseViewModel;
@@ -15,7 +17,9 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class ImageItemVM extends BaseViewModel {
+    private final int id;
     private final Image image;
+    private final Contract contract;
 
     public String getDownloadUrl() {
         return image.getDownloadUrl();
@@ -32,5 +36,14 @@ public class ImageItemVM extends BaseViewModel {
 
         DateFormat format = new SimpleDateFormat("MMM-d HH:m", Locale.US);
         return format.format(d);
+    }
+
+    public void onOptionsClicked(View view) {
+        contract.onShowPopupMenu(view, id);
+    }
+
+
+    interface Contract {
+        void onShowPopupMenu(View view, int id);
     }
 }
