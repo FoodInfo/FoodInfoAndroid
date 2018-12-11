@@ -55,6 +55,11 @@
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
+            android:name=".view.imagedetails.ImageDetailsActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
             android:name=".view.camera.CameraActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />

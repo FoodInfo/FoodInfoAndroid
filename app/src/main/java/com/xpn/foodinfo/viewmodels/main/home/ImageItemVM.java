@@ -42,8 +42,13 @@ public class ImageItemVM extends BaseViewModel {
         contract.onShowPopupMenu(view, id);
     }
 
+    public void onContentClicked() {
+        contract.onShowImageDetails(id);
+    }
+
 
     interface Contract {
         void onShowPopupMenu(View view, int id);
+        void onShowImageDetails(int id);
     }
 }

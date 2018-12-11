@@ -96,6 +96,7 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.8.0'          // Glide - Image loader
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'  // Glide - Annotation processor
     implementation 'com.mikhaellopez:circularimageview:3.2.0'       // Circle ImageView
+    implementation 'com.sothree.slidinguppanel:library:3.4.0'       // Sliding up panel
 
     // Dependency injection - Dagger 2
     implementation 'com.google.dagger:dagger:2.19'

@@ -5,10 +5,12 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 
 import com.xpn.foodinfo.BR;
+import com.xpn.foodinfo.models.Image;
 import com.xpn.foodinfo.services.image.ImageService;
 import com.xpn.foodinfo.services.user.UserService;
 import com.xpn.foodinfo.view.util.image.loading.BindingAdapters;
 import com.xpn.foodinfo.viewmodels.BaseViewModel;
+import com.xpn.foodinfo.viewmodels.util.SingleLiveEvent;
 
 import java.util.Date;
 
@@ -23,6 +25,8 @@ public class CameraVM extends BaseViewModel implements BindingAdapters.ImageList
 
     private final UserService userService;
     private final ImageService imageService;
+
+    private SingleLiveEvent <Image> showImageDetails = new SingleLiveEvent<>();
 
 
     private State state = State.CAPTURING;
@@ -78,11 +82,14 @@ public class CameraVM extends BaseViewModel implements BindingAdapters.ImageList
         String imageName = uriString.substring( uriString.lastIndexOf('/')+1);
         addSubscription(
                 imageService.upload(userService.getCurrentUser(), imageName, new Date(), imageUri)
-                        .flatMap(image -> imageService.add(image).toSingleDefault(true))
+                        .flatMap(image -> imageService.add(image).toSingleDefault(image))
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
-                                obs -> Timber.e("Uploaded and inserted into the database: %s", imageName),
+                                image -> {
+                                    showImageDetails.setValue(image);
+                                    Timber.e("Uploaded and inserted into the database: %s", imageName);
+                                },
                                 Timber::e
                         ));
     }
@@ -113,6 +120,10 @@ public class CameraVM extends BaseViewModel implements BindingAdapters.ImageList
     @Override
     public void onFailure(Exception e) {
         setState(State.CAPTURING);
+    }
+
+    public SingleLiveEvent <Image> showImageDetailsListener() {
+        return showImageDetails;
     }
 
     public enum State {

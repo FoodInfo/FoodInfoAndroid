@@ -26,6 +26,7 @@ import com.xpn.foodinfo.FoodInfoApp;
 import com.xpn.foodinfo.R;
 import com.xpn.foodinfo.databinding.HomeFragmentBinding;
 import com.xpn.foodinfo.view.about.AboutActivity;
+import com.xpn.foodinfo.view.imagedetails.ImageDetailsActivity;
 import com.xpn.foodinfo.viewmodels.main.home.HomeVM;
 import com.xpn.foodinfo.viewmodels.main.home.HomeVMFactory;
 
@@ -62,6 +63,7 @@ public class HomeFragment extends Fragment {
         super.onStart();
         viewModel.onStart();
         viewModel.showPopupMenuListener().observe(this, p -> showPopupMenu(p.first, p.second));
+        viewModel.showImageDetailsListener().observe(this, image -> ImageDetailsActivity.start(getContext(), image));
     }
 
     @SuppressLint("RestrictedApi")

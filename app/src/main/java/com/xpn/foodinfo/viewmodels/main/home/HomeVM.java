@@ -24,8 +24,10 @@ import timber.log.Timber;
 public class HomeVM extends BaseViewModel implements ImageItemVM.Contract {
     private final UserService userService;
     private final ImageService imageService;
+    private List <Image> images = new ArrayList<>();
     private List <ImageItemVM> imageVMs = new ArrayList<>();
     private SingleLiveEvent <Pair<View, Integer> > showPopupMenu = new SingleLiveEvent<>();
+    private SingleLiveEvent <Image> showImageDetails = new SingleLiveEvent<>();
 
 
     public void onStart() {
@@ -54,6 +56,7 @@ public class HomeVM extends BaseViewModel implements ImageItemVM.Contract {
         return imageVMs;
     }
     private void setImageVMs(List<Image> images) {
+        this.images = images;
         imageVMs.clear();
         for( int i=0; i < images.size(); ++i ) {
             imageVMs.add(new ImageItemVM(i, images.get(i), this));
@@ -66,7 +69,15 @@ public class HomeVM extends BaseViewModel implements ImageItemVM.Contract {
         showPopupMenu.setValue(new Pair<>(view, id));
     }
 
+    @Override
+    public void onShowImageDetails(int id) {
+        showImageDetails.setValue(images.get(id));
+    }
+
     public SingleLiveEvent <Pair<View, Integer> > showPopupMenuListener() {
         return showPopupMenu;
+    }
+    public SingleLiveEvent <Image> showImageDetailsListener() {
+        return showImageDetails;
     }
 }

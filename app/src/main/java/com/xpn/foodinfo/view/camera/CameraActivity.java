@@ -20,6 +20,7 @@ import com.xpn.foodinfo.FoodInfoApp;
 import com.xpn.foodinfo.R;
 import com.xpn.foodinfo.databinding.ActivityCameraBinding;
 import com.xpn.foodinfo.util.DateTimeUtil;
+import com.xpn.foodinfo.view.imagedetails.ImageDetailsActivity;
 import com.xpn.foodinfo.viewmodels.camera.CameraVM;
 import com.xpn.foodinfo.viewmodels.camera.CameraVMFactory;
 
@@ -53,6 +54,15 @@ public class CameraActivity extends AppCompatActivity implements CameraFragment.
         viewModel = ViewModelProviders.of(this, new CameraVMFactory(dependency.getUserService(), dependency.getImageService())).get(CameraVM.class);
         binding.setViewModel(viewModel);
         onShowCamera();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        viewModel.showImageDetailsListener().observe(this, image -> {
+            ImageDetailsActivity.start(this, image);
+            finish();
+        });
     }
 
     @Override
