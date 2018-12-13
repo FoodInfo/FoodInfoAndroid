@@ -35,13 +35,17 @@
                 android:text="Contents:"
                 android:textSize="31sp" />
 
-            <TextView
+            <android.support.v4.widget.NestedScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="12dp"
-                android:textStyle="bold"
-                android:text="@{viewModel.info}"
-                android:textSize="23sp" />
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    android:textStyle="bold"
+                    android:text="@{viewModel.info}"
+                    android:textSize="15sp" />
+            </android.support.v4.widget.NestedScrollView>
         </LinearLayout>
     </com.sothree.slidinguppanel.SlidingUpPanelLayout>
 

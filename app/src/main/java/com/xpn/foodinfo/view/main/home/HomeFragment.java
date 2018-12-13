@@ -47,6 +47,7 @@ public class HomeFragment extends Fragment {
 
         binding.images.setNestedScrollingEnabled(false);
         binding.images.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        binding.images.setItemAnimator(null);
 
 
         Dependency dependency = ((FoodInfoApp) getActivity().getApplication()).getDependency();

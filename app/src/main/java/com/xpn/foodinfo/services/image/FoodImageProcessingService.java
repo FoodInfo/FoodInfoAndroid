@@ -12,5 +12,5 @@ import retrofit2.http.Query;
 public interface FoodImageProcessingService {
 
     @GET( "processImage" )
-    Observable<List<Nutrient>> processImage(@Query(value = "text") String text);
+    Observable<List<Nutrient>> processImage(@Query(value = "imageUrl") String text);
 }
